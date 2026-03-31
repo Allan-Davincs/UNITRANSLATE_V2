@@ -1,0 +1,38 @@
+﻿{
+  "name": "UniTranslate",
+  "short_name": "UniTranslate",
+  "description": "Translate, speak, and save multilingual phrases quickly.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f2f46",
+  "theme_color": "#0c7a6f",
+  "categories": ["productivity", "utilities", "education"],
+  "shortcuts": [
+    {
+      "name": "Quick Translate",
+      "short_name": "Translate",
+      "url": "/"
+    },
+    {
+      "name": "Open Phrasebook",
+      "short_name": "Phrasebook",
+      "url": "/#phrasebook"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/static/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

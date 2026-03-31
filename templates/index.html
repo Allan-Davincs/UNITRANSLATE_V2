@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTranslate</title>
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="theme-color" content="#0c7a6f">
+    <link rel="apple-touch-icon" href="/static/images/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="logo-mark" aria-hidden="true">UT</span>
+                <div>
+                    <h1>UniTranslate</h1>
+                    <p class="tagline">Fast multilingual assistant</p>
+                </div>
+            </div>
+            <button id="settingsBtn" class="icon-btn" aria-label="Open settings">Settings</button>
+        </header>
+
+        <div id="networkBanner" class="network-banner hidden" role="status" aria-live="polite"></div>
+
+        <main id="mainView">
+            <section class="card" aria-labelledby="translatorTitle">
+                <h2 id="translatorTitle">Translator</h2>
+
+                <label for="inputText">Source text</label>
+                <textarea id="inputText" placeholder="Type, dictate, or scan text..." rows="4" aria-label="Text to translate"></textarea>
+                <div class="input-meta">
+                    <span id="charCounter">0 characters</span>
+                    <span id="modeBadge" class="badge">Auto translate on</span>
+                </div>
+
+                <div class="lang-layout">
+                    <div>
+                        <label for="sourceLang">From</label>
+                        <select id="sourceLang" aria-label="Source language">
+                            <option value="">Auto-detect</option>
+                            <option value="EN">English</option>
+                            <option value="FR">French</option>
+                            <option value="DE">German</option>
+                            <option value="ES">Spanish</option>
+                            <option value="IT">Italian</option>
+                            <option value="PT">Portuguese</option>
+                            <option value="RU">Russian</option>
+                            <option value="ZH">Chinese</option>
+                            <option value="JA">Japanese</option>
+                        </select>
+                        <span id="sourceBadge" class="lang-badge">Auto</span>
+                    </div>
+
+                    <button id="swapLangBtn" class="swap-btn" type="button" aria-label="Swap source and target language">Swap</button>
+
+                    <div>
+                        <label for="targetLang">To</label>
+                        <select id="targetLang" aria-label="Target language">
+                            <option value="ES">Spanish</option>
+                            <option value="FR">French</option>
+                            <option value="DE">German</option>
+                            <option value="EN">English</option>
+                            <option value="IT">Italian</option>
+                            <option value="PT">Portuguese</option>
+                            <option value="RU">Russian</option>
+                            <option value="ZH">Chinese</option>
+                            <option value="JA">Japanese</option>
+                        </select>
+                        <span id="targetBadge" class="lang-badge">Spanish</span>
+                    </div>
+                </div>
+
+                <div class="stack-row">
+                    <div>
+                        <label for="toneSelect">Tone</label>
+                        <select id="toneSelect" aria-label="Translation tone">
+                            <option value="neutral">Neutral</option>
+                            <option value="formal">Formal</option>
+                            <option value="casual">Casual</option>
+                        </select>
+                    </div>
+                    <button id="translateBtn" class="primary-btn" type="button">Translate</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="copyBtn" type="button" disabled>Copy</button>
+                    <button id="shareBtn" type="button" disabled>Share</button>
+                    <button id="favoriteBtn" type="button" disabled>Save favorite</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="speakBtn" type="button" disabled>Speak</button>
+                    <button id="stopSpeakBtn" type="button">Stop</button>
+                    <button id="retryBtn" type="button" class="hidden">Retry</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="startMicBtn" type="button">Start mic</button>
+                    <button id="stopMicBtn" type="button" disabled>Stop mic</button>
+                    <button id="conversationBtn" type="button">Conversation mode</button>
+                </div>
+
+                <div class="action-buttons">
+                    <input id="ocrInput" type="file" accept="image/*" capture="environment" class="hidden" aria-hidden="true">
+                    <button id="ocrBtn" type="button">Scan from camera/image</button>
+                </div>
+
+                <section id="phrasebook" class="phrasebook" aria-labelledby="phrasebookTitle">
+                    <div class="phrasebook-head">
+                        <h3 id="phrasebookTitle">Phrasebook</h3>
+                        <select id="phrasebookPack" aria-label="Phrasebook pack">
+                            <option value="travel">Travel</option>
+                            <option value="business">Business</option>
+                            <option value="medical">Medical</option>
+                        </select>
+                    </div>
+                    <div id="phraseChips" class="chips" role="list"></div>
+                </section>
+
+                <section class="result-section" aria-labelledby="resultHeading">
+                    <div class="result-header">
+                        <h3 id="resultHeading">Result</h3>
+                        <span id="statusText" class="status-text" aria-live="polite">Ready</span>
+                    </div>
+                    <div id="result" class="result-box" aria-live="polite"></div>
+                </section>
+
+                <section class="saved-section" aria-labelledby="historyHeading">
+                    <h3 id="historyHeading">Recent history</h3>
+                    <ul id="historyList" class="saved-list"></ul>
+                </section>
+
+                <section class="saved-section" aria-labelledby="favoritesHeading">
+                    <h3 id="favoritesHeading">Favorites</h3>
+                    <ul id="favoritesList" class="saved-list"></ul>
+                </section>
+            </section>
+        </main>
+
+        <div id="settingsView" class="settings-view hidden" aria-hidden="true">
+            <div class="settings-header">
+                <button id="backBtn" class="icon-btn" aria-label="Back to translator">Back</button>
+                <h2>Settings</h2>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label for="themeSelect">Theme</label>
+                    <select id="themeSelect">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="emailInput">Email (for support)</label>
+                    <input type="email" id="emailInput" placeholder="your@email.com">
+                </div>
+                <div class="setting-item checkbox-item">
+                    <input id="autoTranslateToggle" type="checkbox">
+                    <label for="autoTranslateToggle">Enable auto-translate while typing</label>
+                </div>
+                <div class="setting-item">
+                    <label>Help and support</label>
+                    <button id="supportBtn" class="secondary-btn" type="button">Contact support</button>
+                </div>
+                <button id="installBtn" class="primary-btn hidden" type="button">Install app</button>
+                <button id="saveSettings" class="primary-btn" type="button">Save settings</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Copyright DAVINCSTECH © 2026</p>
+        </footer>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+    <script src="/static/js/app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((reg) => console.log('SW registered', reg))
+                .catch((err) => console.log('SW registration failed', err));
+        }
+    </script>
+</body>
+</html>
+
