@@ -121,7 +121,4 @@ Response:
 - If offline behavior is inconsistent, hard refresh the page (bypass cache) and try again.
 
 ---
-
-## License
-
-MIT (or specify your license here).
+## Feel free to edit, fork and contribute to this Project
